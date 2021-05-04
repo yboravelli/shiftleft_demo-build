@@ -1,3 +1,6 @@
+version=$(curl -q -k -u $TL_USER:$TL_PASS -H 'Content-Type: application/json' -X GET https://$TL_CONSOLE/api/v1/version | sed -e 's/"//' |cut -d. -f1)
+
+
 curl -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
