@@ -23,7 +23,7 @@ curl -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   -X PUT \
-  -d "$payload" \
+  -d "$runtime_payload" \
   https://$TL_CONSOLE/api/v1/policies/runtime/container
 
 
@@ -58,7 +58,7 @@ curl -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   -X PUT \
-  -d "$payload" \
+  -d "$waas_payload" \
    https://$TL_CONSOLE/api/v1/policies/firewall/app/container
 
 status=$?
