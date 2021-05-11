@@ -1,4 +1,5 @@
 #!/bin/bash -l
+#curl -k -u $TL_USER:$TL_PASS -H 'Content-Type: application/json' -X POST https://$TL_CONSOLE/api/v1/coderepos/scan
 REPOOUTPUT=$(curl -k -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   https://$TL_CONSOLE/api/v1/coderepos?id=pasqua1e%2Fevil.petclinic&limit=15&offset=0&project=Central+Console&reverse=true&sort=vulnerabilityRiskScore)
