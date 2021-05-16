@@ -24,7 +24,7 @@ curl -k \
   -H 'Content-Type: application/json' \
   -X PUT \
   -d '{"feed":[{"name":"evil","md5":"b927cd908b58e703ab86f484b44a3791","allowed":false}]}' 
-  https://$TL_CONSOLE/api/v1/feeds/custom/malware?project=Central+Console
+  https://$TL_CONSOLE/api/v1/feeds/custom/malware
 
 curl -k \
   -u $TL_USER:$TL_PASS \
