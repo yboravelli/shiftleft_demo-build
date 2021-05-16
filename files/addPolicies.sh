@@ -18,6 +18,13 @@ curl -k \
   -d '{"name":"evilpetclinic","containers":["*"],"hosts":["*"],"images":["*evilpetclinic*"],"labels":["*"],"appIDs":["*"],"functions":["*"],"namespaces":["*"],"accountIDs":["*"],"codeRepos":["*"],"clusters":["*"],"color":"#68DCFC"}' \
   https://$TL_CONSOLE/api/v1/collections
 
+#add customer malware signature
+curl -k \
+  -u $TL_USER:$TL_PASS \
+  -H 'Content-Type: application/json' \
+  -X PUT \
+  -d '{"feed":[{"name":"evil","md5":"b927cd908b58e703ab86f484b44a3791","allowed":false}]}' 
+  https://$TL_CONSOLE/api/v1/feeds/custom/malware?project=Central+Console
 
 curl -k \
   -u $TL_USER:$TL_PASS \
