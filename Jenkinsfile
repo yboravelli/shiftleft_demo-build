@@ -115,7 +115,7 @@ stage("Scan Cloud Formation Template with API v2") {
         sh 'kubectl create ns evil --dry-run -o yaml | kubectl apply -f -'
         sh 'kubectl delete --ignore-not-found=true -f files/deploy.yml -n evil'
         sh 'kubectl apply -f files/deploy.yml -n evil'
-        sh 'sleep 20'
+        sh 'sleep 30'
     }
 
     stage('Run bad Runtime attacks') {
