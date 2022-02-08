@@ -53,10 +53,11 @@ node {
     }
 
 
-	stage('Scan K8s yaml manifest with Bridgecrew') {  
-		withDockerContainer(image: 'bridgecrew/jenkins_bridgecrew_runner:latest') {
-		sh "/run.sh $BC_API https://github.com/pasqua1e/shiftleft_demo-build/" }
+    stage('Scan K8s yaml manifest with Bridgecrew') {  
+	withDockerContainer(image: 'bridgecrew/jenkins_bridgecrew_runner:latest') {
+	sh "/run.sh $BC_API https://github.com/pasqua1e/shiftleft_demo-build/" 
 	}
+    }
 	
 
     stage('Deploy evilpetclinic') {
