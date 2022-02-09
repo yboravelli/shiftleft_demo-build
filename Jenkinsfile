@@ -10,6 +10,13 @@ node {
     }
 
 
+    stage('Download latest twistcli') {
+        withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
+            sh 'curl -k -u $TL_USER:$TL_PASS --output ./twistcli https://$TL_CONSOLE/api/v1/util/twistcli'
+            sh 'sudo chmod a+x ./twistcli'
+        }
+    }
+	
     stage('Check image Git dependencies has no vulnerabilities') {
         try {
             withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
@@ -29,13 +36,7 @@ node {
         }
     }
 
-    //$PC_USER,$PC_PASS,$PC_CONSOLE when Galileo is released. 
-    stage('Download latest twistcli') {
-        withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
-            sh 'curl -k -u $PC_USER:$PC_PASS --output ./twistcli https://$TL_CONSOLE/api/v1/util/twistcli'
-            sh 'sudo chmod a+x ./twistcli'
-        }
-    }
+    
 
     stage('Scan image with twistcli') {
         try {
