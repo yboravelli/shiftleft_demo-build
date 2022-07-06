@@ -59,7 +59,7 @@ node {
                     		sh """export PRISMA_API_URL=https://api.prismacloud.io
                     		pipenv install
                     		pipenv run pip install bridgecrew
-                    		pipenv run bridgecrew --directory . --bc-api-key $PCCS_API --repo-id pasq/shift-left"""
+                    		pipenv run bridgecrew -s --directory . --bc-api-key $PCCS_API --repo-id pasq/shift-left"""
                 	}
 		}
 	}
