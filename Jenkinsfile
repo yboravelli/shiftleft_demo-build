@@ -1,10 +1,6 @@
 node {
     files= ['deploy.yml']
 
-    //withCredentials([usernamePassword(credentialsId: 'prisma_cloud', passwordVariable: 'PC_PASS', usernameVariable: 'PC_USER')]) {
-    //PC_TOKEN = sh(script:"curl -s -k -H 'Content-Type: application/json' -H 'accept: application/json' --data '{\"username\":\"$PC_USER\", \"password\":\"$PC_PASS\"}' https://${AppStack}/login | jq --raw-output .token", returnStdout:true).trim()
-    //}
-
     stage('Clone repository') {
         checkout scm
     }
@@ -55,10 +51,16 @@ node {
 
 
     stage('Scan K8s yaml manifest with Bridgecrew') {  
-	withDockerContainer(image: 'bridgecrew/jenkins_bridgecrew_runner:latest') {
-		withCredentials([string(credentialsId: 'BC_API', variable: 'BC_API')]) { 
+	withDockerContainer(image: 'kennethreitz/pipenv:latest', args: '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock' ) {
+		withCredentials([string(credentialsId: 'PCCS_API', variable: 'PCCS_API')]) { 
 			//sh "/run.sh $BC_API https://github.com/pasqua1e/shiftleft_demo-build/"
-			sh "/run.sh $BC_API ."
+			//sh "/run.sh $BC_API ."
+			script { 
+                    		sh """export PRISMA_API_URL=https://api.prismacloud.io
+                    		pipenv install
+                    		pipenv run pip install bridgecrew
+                    		pipenv run bridgecrew --directory . --bc-api-key $PCCS_API --repo-id pasq/shift-left"""
+                	}
 		}
 	}
     }
