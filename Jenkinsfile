@@ -57,7 +57,8 @@ node {
     stage('Scan K8s yaml manifest with Bridgecrew') {  
 	withDockerContainer(image: 'bridgecrew/jenkins_bridgecrew_runner:latest') {
 		withCredentials([string(credentialsId: 'BC_API', variable: 'BC_API')]) { 
-			sh "/run.sh $BC_API https://github.com/pasqua1e/shiftleft_demo-build/" 
+			//sh "/run.sh $BC_API https://github.com/pasqua1e/shiftleft_demo-build/"
+			sh "/run.sh $BC_API ."
 		}
 	}
     }
