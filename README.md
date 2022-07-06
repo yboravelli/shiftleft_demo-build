@@ -1,4 +1,10 @@
 ### How to setup the Shift Left demo story with all stop-gaps
+
+## TLDR;
+1) Create a new secret in Jenkins, called PCCS_API (the value needs to be your Access Key in Prisma Cloud, which is in the format AccessKey::SecretKey)
+2) Create a new pipeline in Jenkins and point to this repo
+
+## Detailes steps:
 You can clone this repo and put it in the demo-build gogs server, so that can in turn be used in the demo-build Jenkins server with all pre-existing vars and passwors.
 You can also point the demo-build server to this repo, once it becomes public, or to your fork, instead of copying to the gogs server.
 
