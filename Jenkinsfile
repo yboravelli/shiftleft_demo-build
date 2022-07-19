@@ -25,7 +25,7 @@ node {
         }
     }
 
-    //$PC_USER,$PC_PASS,$PC_CONSOLE when Galileo is released. 
+    
     stage('Apply security policies (Policy-as-Code) for evilpetclinic') {
         withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
             sh('chmod +x files/addPolicies.sh && ./files/addPolicies.sh')
@@ -53,8 +53,7 @@ node {
     stage('Scan K8s yaml manifest with Bridgecrew') {  
 	withDockerContainer(image: 'kennethreitz/pipenv:latest', args: '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock' ) {
 		withCredentials([string(credentialsId: 'PCCS_API', variable: 'PCCS_API')]) { 
-			//sh "/run.sh $BC_API https://github.com/pasqua1e/shiftleft_demo-build/"
-			//sh "/run.sh $BC_API ."
+			
 			script { 
                     		sh """export PRISMA_API_URL=https://api.prismacloud.io
                     		pipenv install
