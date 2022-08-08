@@ -50,22 +50,7 @@ node {
     }
 
 
-    stage('Scan K8s yaml manifest with Bridgecrew') {  
-	withDockerContainer(image: 'kennethreitz/pipenv:latest', args: '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock' ) {
-		withCredentials([string(credentialsId: 'PCCS_API', variable: 'PCCS_API')]) { 
-			
-			script { 
-                    		sh """export PRISMA_API_URL=https://api.prismacloud.io
-                    		pipenv install
-                    		pipenv run pip install bridgecrew
-                    		pipenv run bridgecrew -s -o cli --directory . --bc-api-key $PCCS_API --repo-id jenkins/$BUILD_TAG"""
-                	}
-		}
-	}
-    }
-	
-
-    stage('Deploy evilpetclinic') {
+     stage('Deploy evilpetclinic') {
         sh 'kubectl create ns evil --dry-run -o yaml | kubectl apply -f -'
         sh 'kubectl delete --ignore-not-found=true -f files/deploy.yml -n evil'
         sh 'kubectl apply -f files/deploy.yml -n evil'
